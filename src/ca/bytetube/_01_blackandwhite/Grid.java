@@ -1,13 +1,19 @@
 package ca.bytetube._01_blackandwhite;
 
+import java.util.Stack;
+
 public class Grid {
     private int[][] grids;
-    private int rows;
-    private int cols;
+    private final int rows;
+    private final int cols;
+
+    private Stack<int[]> gameHistory; // store[row, col] of each move
+
 
     public Grid(int rows, int cols) {
         this.rows = rows;
         this.cols = cols;
+        this.gameHistory = new Stack<>();
         initBoard();
     }
 
@@ -18,9 +24,11 @@ public class Grid {
                 grids[r][c] = GridPosition.EMPTY.ordinal();
             }
         }
+        this.gameHistory.clear(); // clear game history for a new game
     }
 
     //place one piece in the specified col, automatically falling to the lowest row
+
     /**
      * @return row index
      */
@@ -31,6 +39,7 @@ public class Grid {
         for (int r = rows - 1; r >= 0; r--) {
             if (grids[r][col] == GridPosition.EMPTY.ordinal()) {
                 grids[r][col] = piece.ordinal();
+                gameHistory.push(new int[]{r, col}); // record the move
                 return r;
             }
         }
@@ -45,7 +54,7 @@ public class Grid {
             if (grids[row][c] == piece.ordinal()) {
                 count++;
             } else {
-                count--;
+                count = 0;
             }
             if (count == connectN) {
                 return true;
@@ -57,13 +66,13 @@ public class Grid {
             if (grids[r][col] == piece.ordinal()) {
                 count++;
             } else {
-                count--;
+                count = 0;
             }
             if (count == connectN) {
                 return true;
             }
         }
-        //3.diagonal
+        //3.diagonal(top right to bottom left)
         count = 0;
         for (int r = 0; r < rows; r++) {
             int c = row + col - r;//row + col = r + c
@@ -76,7 +85,7 @@ public class Grid {
                 return true;
             }
         }
-
+        //4.diagonal(top left to bottom right)
         count = 0;
         for (int r = 0; r < rows; r++) {
             int c = col - row + r;//row - col = r - c
@@ -99,6 +108,17 @@ public class Grid {
 
     public int getCols() {
         return cols;
+    }
+
+    public boolean undoLastMove() {
+        if (gameHistory.isEmpty()) {
+            return false; // no moves to undo
+        }
+        int[] lastMove = gameHistory.pop();
+        int row = lastMove[0];
+        int col = lastMove[1];
+        grids[row][col] = GridPosition.EMPTY.ordinal(); // reset the cell to empty
+        return true; // undo successful
     }
 
 
