@@ -20,6 +20,10 @@ public class ParkingSystem {
     }
 
     public boolean parkVehicle(Driver driver) {
+        if (timeParked.containsKey(driver.getId())) {
+            return false; // FIX: Prevent duplicate parking
+        }
+
         int currHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         boolean isParked = parkingGarage.parkVehicle(driver.getVehicle());
         if (isParked) {
@@ -36,7 +40,8 @@ public class ParkingSystem {
         }
         int end = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         int start = timeParked.get(driver.getId());
-        int duration = (end - start);
+        int duration = Math.max(1, end - start); // Ensure positive duration
+
         driver.charge(duration * hourRate);
         System.out.println("driver payment due is " + driver.getPaymentDue());
         timeParked.remove(driver.getId());

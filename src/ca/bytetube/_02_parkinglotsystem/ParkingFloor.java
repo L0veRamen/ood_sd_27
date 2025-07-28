@@ -10,7 +10,7 @@ import java.util.Map;
 public class ParkingFloor {
     //0 = available, 1= occupied
     private int[] spots;
-    private Map<Vehicle, int[]> vehicleMap;
+    private Map<Vehicle, int[]> vehicleMap; // Maps vehicles to their assigned parking spots -> [startSpot, endSpot]
 
 
     public ParkingFloor(int spotsCount) {
@@ -48,12 +48,19 @@ public class ParkingFloor {
     //release the parking spots occupied by the vehicle
     public boolean removeVehicle(Vehicle vehicle) {
         int[] startEnd = vehicleMap.get(vehicle);
+        // If startEnd is null, the vehicle was not in the map.
+        if (startEnd == null) {
+            return false; // Return false for an unsuccessful removal.
+        }
+        vehicleMap.remove(vehicle); // Remove from map
+        // If we get here, the vehicle was successfully removed from the map.
+        // Now, free up the spots.
         int start = startEnd[0];
         int end = startEnd[1];
         for (int k = start; k <= end; k++) {
             spots[k] = 0;
         }
 
-        return vehicleMap.remove(vehicle) == null;
+        return true;
     }
 }
