@@ -1,5 +1,8 @@
 package ca.bytetube._03_movierecommendationsystem;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 
 public class RecommendationSystem {
@@ -52,15 +55,16 @@ public class RecommendationSystem {
 
 
         return bestMovie != null ? bestMovie.getTitle() : null;
+
     }
 
 
     public int similarityScore(User user1, User user2) {
         int score = Integer.MAX_VALUE;
-        for (Movie movie : ratingRegister.getUserMovies(user2)) {
+        for (Movie movie : ratingRegister.getUserMovies(user1)) {
             Map<Integer, MovieRating> ratings = ratingRegister.getMovieRatings(movie);
             //if user1 also rated the movie, add the difference in ratings
-            if (ratings.containsKey(user1.getId())) {
+            if (ratings.containsKey(user2.getId())) {
                 score = (score == Integer.MAX_VALUE) ? 0 : score;
                 score += Math.abs(ratings.get(user1.getId()).ordinal() - ratings.get(user2.getId()).ordinal());
             }

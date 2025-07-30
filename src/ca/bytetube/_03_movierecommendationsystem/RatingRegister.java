@@ -30,7 +30,12 @@ public class RatingRegister {
             users.add(user);
         }
 
-        userMovies.get(user.getId()).add(movie);
+        // Only add the movie to user's list if they haven't rated it before
+        List<Movie> userMovieList = userMovies.get(user.getId());
+        if (!userMovieList.contains(movie)) {
+            userMovieList.add(movie);
+        }
+
         movieRatings.get(movie.getId()).put(user.getId(), rating);
 
     }
