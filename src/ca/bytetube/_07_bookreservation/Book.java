@@ -9,4 +9,9 @@ public class Book extends Resource {
         this.isbn = isbn;
         this.author = author;
     }
+
+    @Override
+    public double getDailyRate() {
+        return 1.0;
+    }
 }

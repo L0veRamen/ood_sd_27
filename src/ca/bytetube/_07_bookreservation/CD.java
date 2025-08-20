@@ -26,4 +26,9 @@ public class CD extends Resource {
     public void setArtist(String artist) {
         this.artist = artist;
     }
+
+    @Override
+    public double getDailyRate() {
+        return 2.0;
+    }
 }

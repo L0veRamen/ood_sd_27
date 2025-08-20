@@ -1,7 +1,6 @@
 package ca.bytetube._07_bookreservation;
 
 import java.util.List;
-import java.util.Map;
 
 public class Library {
     ResourceManager manager;
@@ -14,9 +13,17 @@ public class Library {
         manager.addResource(resource);
     }
 
-    public void releaseResource(String resourceId, String name) {
-        manager.releaseResource(resourceId, name);
+    public void addUser(User user) {
+        manager.addUser(user);
     }
+
+    public User getUser(String userId) {
+        return manager.getUser(userId);
+    }
+
+//    public void releaseResource(String resourceId, String name) {
+//        manager.releaseResource(resourceId, name);
+//    }
 
 
     public Resource getResource(String resourceId) {
@@ -29,9 +36,18 @@ public class Library {
     }
 
 
-    public boolean reserve(String resourceId, String name) {
-        return manager.reserve(resourceId, name);
+    //    public boolean reserve(String resourceId, String name) {
+//        return manager.reserve(resourceId, name);
+//    }
+
+    public boolean reserve(String resourceId, String userId, int days) {
+        return manager.reserve(resourceId, userId, days);
     }
+
+    public boolean releaseAndPay(String resourceId, String userId) {
+        return manager.releaseAndPay(resourceId, userId);
+    }
+
 
 
 }
