@@ -28,6 +28,3 @@ public class Package {
         return String.format("Package[id=%s, size=%d, desc=%s]", id, size, description);
     }
 }
-
-
-

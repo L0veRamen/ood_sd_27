@@ -25,8 +25,6 @@ public class Main {
         // Demonstrate locker release
         demonstrateLockerRelease(lockerSystem);
 
-        // Demonstrate advanced search functionality
-        demonstrateAdvancedSearch(lockerSystem);
 
         // Demonstrate performance testing
         demonstratePerformanceTest();
@@ -106,24 +104,6 @@ public class Main {
         for (String lockerId : lockersToRelease) {
             system.releaseLocker(lockerId);
         }
-
-        system.printSystemStatus();
-    }
-
-    /**
-     * Demonstrate advanced search functionality
-     */
-    private static void demonstrateAdvancedSearch(LockerSystem system) {
-        System.out.println("=== Advanced Search Functionality Demo ===");
-
-        // Find lockers within a specific size range
-        List<Locker> mediumLockers = system.findAvailableLockersByRange(15, 25);
-        System.out.println("Number of available lockers with size between 15-25: " + mediumLockers.size());
-
-        // Assign another package to test availability after release
-        Package newPackage = new Package("P009", 18, "Medium package - Camera");
-        System.out.println("\nAssigning locker for new package: " + newPackage);
-        system.assignLocker(newPackage);
 
         system.printSystemStatus();
     }

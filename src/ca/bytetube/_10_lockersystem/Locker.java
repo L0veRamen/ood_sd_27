@@ -49,6 +49,17 @@ public class Locker {
         return size;
     }
 
+    public boolean isOccupied() {
+        return isOccupied;
+    }
+
+    public Package getStoredPackage() {
+        return storedPackage;
+    }
+
+    public long getAssignedTime() {
+        return assignedTime;
+    }
     
     @Override
     public String toString() {
@@ -56,6 +67,3 @@ public class Locker {
                            id, size, isOccupied, storedPackage != null ? storedPackage.getId() : "null");
     }
 }
-
-
-
