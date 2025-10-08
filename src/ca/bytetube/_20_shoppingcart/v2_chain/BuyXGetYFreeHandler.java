@@ -1,15 +1,13 @@
-package ca.bytetube._18_shoppingcart.v1_strategy;
+package ca.bytetube._20_shoppingcart.v2_chain;
 
-import ca.bytetube.ood._20_shoppingcart.model.CartItem;
+import ca.bytetube._20_shoppingcart.model.CartItem;
 
-import java.util.List;
-
-public class BuyXGetYFreeRule implements PricingRule {
+public class BuyXGetYFreeHandler extends AbstractDiscountHandler {
     private final String productId;
     private final int buyX;
     private final int getY;
 
-    public BuyXGetYFreeRule(String productId, int buyX, int getY) {
+    public BuyXGetYFreeHandler(String productId, int buyX, int getY) {
         if (buyX <= 0 || getY < 0) throw new IllegalArgumentException("invalid x/y");
         this.productId = productId;
         this.buyX = buyX;
@@ -17,17 +15,17 @@ public class BuyXGetYFreeRule implements PricingRule {
     }
 
     @Override
-    public double apply(List<CartItem> items, double currentTotal) {
-        for (CartItem item : items) {
+    protected void apply(PricingContext context) {
+        for (CartItem item : context.getItems()) {
             if (item.getProduct().getId().equals(productId)) {
                 int group = buyX + getY;
                 int quantity = item.getQuantity();
                 int freeUnits = (quantity / group) * getY;
                 double discount = freeUnits * item.getProduct().getUnitPrice();
-                return Math.max(0, currentTotal - discount);
+                context.setTotal(Math.max(0, context.getTotal() - discount));
+                return;
             }
         }
-        return currentTotal;
     }
 }
 

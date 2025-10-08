@@ -1,4 +1,4 @@
-package ca.bytetube._18_shoppingcart.model;
+package ca.bytetube._20_shoppingcart.model;
 
 public class CartItem {
     private final Product product;

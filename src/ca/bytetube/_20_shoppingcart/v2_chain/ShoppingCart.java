@@ -1,7 +1,7 @@
-package ca.bytetube._18_shoppingcart.v2_chain;
+package ca.bytetube._20_shoppingcart.v2_chain;
 
-import ca.bytetube.ood._20_shoppingcart.model.CartItem;
-import ca.bytetube.ood._20_shoppingcart.model.Product;
+import ca.bytetube._20_shoppingcart.model.CartItem;
+import ca.bytetube._20_shoppingcart.model.Product;
 
 import java.util.ArrayList;
 import java.util.Collections;

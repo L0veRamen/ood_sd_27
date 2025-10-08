@@ -1,4 +1,4 @@
-package ca.bytetube._18_shoppingcart.v2_chain;
+package ca.bytetube._20_shoppingcart.v2_chain;
 
 public class PercentageOffHandler extends AbstractDiscountHandler {
     private final double percentOff;

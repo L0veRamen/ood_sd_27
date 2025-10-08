@@ -1,6 +1,6 @@
-package ca.bytetube._18_shoppingcart.v2_chain;
+package ca.bytetube._20_shoppingcart.v1_strategy;
 
-import ca.bytetube.ood._20_shoppingcart.model.Product;
+import ca.bytetube._20_shoppingcart.model.Product;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,11 +13,11 @@ public class Main {
         cart.addItem(banana, 5);
         cart.addItem(milk, 2);
 
-        cart.addDiscountHandler(new BuyXGetYFreeHandler("B1", 2, 1));
-        cart.addDiscountHandler(new PercentageOffHandler(0.10, 10.0));
+        cart.addPricingRule(new BuyXGetYFreeRule("B1", 2, 1));
+        cart.addPricingRule(new PercentageOffRule(0.10, 10.0));
 
-        System.out.println("Subtotal (chain): " + cart.getSubtotal());
-        System.out.println("Total after discounts (chain): " + cart.getTotal());
+        System.out.println("Subtotal: " + cart.getSubtotal());
+        System.out.println("Total after discounts: " + cart.getTotal());
     }
 }
 
