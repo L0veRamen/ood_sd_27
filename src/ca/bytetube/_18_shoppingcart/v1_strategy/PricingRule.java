@@ -1,6 +1,6 @@
-package ca.bytetube._20_shoppingcart.v1_strategy;
+package ca.bytetube._18_shoppingcart.v1_strategy;
 
-import ca.bytetube._20_shoppingcart.model.CartItem;
+import ca.bytetube._18_shoppingcart.model.CartItem;
 
 import java.util.List;
 

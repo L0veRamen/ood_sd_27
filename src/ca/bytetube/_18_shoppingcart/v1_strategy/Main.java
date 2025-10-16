@@ -1,6 +1,6 @@
-package ca.bytetube._20_shoppingcart.v1_strategy;
+package ca.bytetube._18_shoppingcart.v1_strategy;
 
-import ca.bytetube._20_shoppingcart.model.Product;
+import ca.bytetube._18_shoppingcart.model.Product;
 
 public class Main {
     public static void main(String[] args) {
